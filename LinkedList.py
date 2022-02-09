@@ -1,3 +1,6 @@
+from random import shuffle
+from time import thread_time
+
 class LinkedList:
     
     # The __Node class is used internally by the LinkedList class. It is 
@@ -229,6 +232,25 @@ class LinkedList:
         newList.merge_sort()
 
         self.merge(newList)
+
+def timedMergeSort(list):
+    starttime = thread_time()
+    list.merge_sort()
+    endtime = thread_time()
+    return endtime-starttime
+
+def mergeTable():
+    csvout = open("Linked_List_Merge_Sort_Times.csv","w")
+    
+    for i in range(100,100000,100):
+            shfl = list(range(i))
+            shuffle(shfl)
+            l = LinkedList(shfl)
+            print(l[0],l[1],l[2],l[3],l[4])
+            dataRow = "{},{}\n".format(i,timedMergeSort(l))
+            print(l[0],l[1],l[2],l[3],l[4])
+            csvout.write(dataRow)
+            print(dataRow)
                 
 def main():
     lst = LinkedList()
@@ -323,6 +345,8 @@ def main():
     newlst.merge_sort()
 
     print(newlst)
+
+    mergeTable()
 
     """print(newlst)
 
